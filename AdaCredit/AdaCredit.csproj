@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Domain\UseCases\**" />
+    <EmbeddedResource Remove="Domain\UseCases\**" />
+    <None Remove="Domain\UseCases\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+    <PackageReference Include="Bogus" Version="34.0.2" />
+    <PackageReference Include="CsvHelper" Version="30.0.1" />
+    <PackageReference Include="Terminal.Gui" Version="1.8.2" />
+  </ItemGroup>
+
+</Project>
