@@ -43,7 +43,20 @@ namespace AdaCredit.UI
                 new MenuItem ("Deslogar", "", () => { Application.RequestStop(); Application.Run<Login>(); }, null, null, Key.AltMask),
                 new MenuItem ("Fechar Programa", "", () => { Application.RequestStop(); }, null, null, Key.AltMask)
             })});
-            Add(menu);
+
+            var fakerButton = new Button()
+            {
+                Text = "Criar Clientes(Bogus)",
+                X = 2,
+                Y = 2,
+            };
+            fakerButton.Clicked += () =>
+            {
+                ClientServices.CreateWithFaker();
+                MessageBox.Query("Clientes Cadastrados", "Foram cadastrados 15 Clientes", "ok");
+            };
+
+            Add(menu, fakerButton);
         }
     }
 }

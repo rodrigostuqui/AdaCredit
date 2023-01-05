@@ -1,6 +1,7 @@
 ﻿using AdaCredit.Data;
 using AdaCredit.Domain;
 using AdaCredit.UI.UseCases;
+using Bogus;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,6 +47,16 @@ namespace AdaCredit.Services
             var user = findClientById(clientId);
 
             return user != null ? user.ToString() : "1";
+        }
+
+        public static void CreateWithFaker()
+        {
+            for(int i = 0; i < 15; i++)
+            {
+                var faker = new Faker("pt_BR");
+                CreateClient(faker.Name.FullName(), faker.Random.ReplaceNumbers("###########"));
+            }
+
         }
 
         public static List<Client> getAllActiveClients()
