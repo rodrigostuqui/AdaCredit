@@ -11,29 +11,41 @@ namespace AdaCredit.Domain
 {
     public class ClientAccount
     {
-        public string Password { get; private set; }
-        public string BankId { get; set; } = "777";
         public string AccountId { get; private set; }
 
-        public string AgencyId { get; set; } = "0001";
+        public decimal Balance { get; set; }
         
-        public ClientAccount(string password, string bankId, string accountId, string agencyId)
+        public ClientAccount(string accountId, decimal balance)
         {
-            this.Password = password;
-            this.BankId = bankId;
             this.AccountId = accountId;
-            this.AgencyId = agencyId;
+            this.Balance = balance;
         }
 
-        public ClientAccount(string password, string accountId)
+        public ClientAccount(string accountId)
         {
-            this.Password = BC.HashPassword(password, BC.GenerateSalt());
-            this.AgencyId = "0001";
-            this.BankId = "777";
             this.AccountId = accountId;
+            this.Balance = 0M;
         }
+
+        public void Deposit(decimal value)
+        {
+            this.Balance += value;
+        }
+
+        public void Withdraw(decimal value)
+        {
+            this.Balance -= value;
+        }
+
+        public new string GetHashCode()
+            => this.AccountId;
 
         public static string GetNewAccountId()
         => new Faker().Random.ReplaceNumbers("#####-#");
+
+        public override string ToString()
+        {
+            return $"Numero Bancario: 777\nNumero da agência: 0001\nNumero da conta: {this.AccountId}\nSaldo:{this.Balance}";
+        }
     }
 }
