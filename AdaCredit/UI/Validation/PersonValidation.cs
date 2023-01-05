@@ -7,7 +7,7 @@ using Terminal.Gui;
 
 namespace AdaCredit.UI.Exceptions
 {
-    public class PersonExceptions
+    public class PersonValidation
     {
         public static void InvalidCpf()
             => MessageBox.Query("Cpf Invalido", "O cpf não foi encontrado na base de dados", "Ok");

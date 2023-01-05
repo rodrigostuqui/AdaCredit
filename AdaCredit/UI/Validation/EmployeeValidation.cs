@@ -7,7 +7,7 @@ using Terminal.Gui;
 
 namespace AdaCredit.UI.Exceptions
 {
-    public class EmployeeExceptions
+    public class EmployeeValidation
     {
         public static void LoginError()
         => MessageBox.Query("Login Invalido", "O login/Senha Está Invalido", "Ok");
