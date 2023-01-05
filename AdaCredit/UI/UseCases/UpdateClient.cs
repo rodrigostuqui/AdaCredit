@@ -9,7 +9,7 @@ using Terminal.Gui;
 
 namespace AdaCredit.UI.UseCases
 {
-    public class UpdateEmployee
+    public class UpdateClient
     {
         public static void Run()
         {
@@ -22,24 +22,24 @@ namespace AdaCredit.UI.UseCases
                 X = Pos.Right(cpfLabel) + 1,
                 Width = Dim.Fill(),
             };
-            var newPassLabel = new Label()
+            var nameLabel = new Label()
             {
-                Text = "Nova Senha: ",
+                Text = "Novo Nome: ",
                 Y = Pos.Bottom(cpfLabel) + 1,
             };
-            var newPassText = new TextField("")
+            var nameText = new TextField("")
             {
-                X = Pos.Right(newPassLabel) + 1,
+                X = Pos.Right(nameLabel) + 1,
                 Y = Pos.Bottom(cpfText) + 1,
                 Width = Dim.Fill(),
-                Secret = true,
             };
             var ok = new Button("Ok", is_default: true);
             ok.Clicked += () =>
             {
-                if (EmployeeServices.UpdateEmployeePass((string)cpfText.Text, (string)newPassText.Text) == "0")
+                var numberError = ClientServices.UpdateClientInfo((string)cpfText.Text, (string)nameText.Text);
+                if (numberError == "0")
                 {
-                    MessageBox.Query("Cadastro Atualizado", "Nome Atualizada com Sucesso", "Ok");
+                    MessageBox.Query("Cadastro Atualizado", "Senha Atualizada com Sucesso", "Ok");
                     Application.Shutdown();
                     Application.Run<Menu>();
                 }
@@ -51,7 +51,7 @@ namespace AdaCredit.UI.UseCases
             var cancel = new Button("Cancel");
             cancel.Clicked += () => { Application.RequestStop(); };
             var d = new Dialog("Cadastrar Funcionario", 60, 20, ok, cancel);
-            d.Add(cpfLabel, cpfText, newPassLabel, newPassText);
+            d.Add(cpfLabel, cpfText, nameLabel, nameText);
             Application.Run(d);
         }
 

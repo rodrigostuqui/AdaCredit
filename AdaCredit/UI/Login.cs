@@ -68,15 +68,15 @@ namespace AdaCredit.UI
                 var errorNumber = EmployeeServices.Auth((string)usernameText.Text, (string)passwordText.Text);
                 switch (errorNumber)
                 {
-                    case 0:
+                    case "0":
                         Application.RequestStop();
                         Application.Run<Menu>();
                         break;
-                    case 3:
-                        EmployeeExceptions.LoginError();
+                    case "3":
+                        EmployeeValidation.LoginError();
                         break;
-                    case 4:
-                        EmployeeExceptions.DeactivateUser();
+                    case "4":
+                        EmployeeValidation.DeactivateUser();
                         break;
                 }
             }
@@ -88,7 +88,7 @@ namespace AdaCredit.UI
                 }
                 else
                 {
-                    EmployeeExceptions.LoginError();
+                    EmployeeValidation.LoginError();
                 }
             }
         }

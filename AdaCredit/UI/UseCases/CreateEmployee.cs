@@ -66,16 +66,16 @@ namespace AdaCredit.UI.UseCases
                 var errorNumber = EmployeeServices.CreateEmployee((string)nameText.Text, (string)cpfText.Text, (string)usernameText.Text, (string)passText.Text);
                 switch (errorNumber)
                 {
-                    case 0:
+                    case "0":
                         MessageBox.Query("Cadastro Atualizado", "Cadastro Feito com Sucesso", "Ok");
                         Application.RequestStop();
                         Application.Run<Menu>();
                         break;
-                    case 1:
-                        PersonExceptions.usedId();
+                    case "1":
+                        PersonValidation.usedId();
                         break;
-                    case 2:
-                        EmployeeExceptions.usedLogin();
+                    case "2":
+                        EmployeeValidation.usedLogin();
                         break;
                 }
             };

@@ -26,7 +26,7 @@ namespace AdaCredit.UI.UseCases
             deactivate.Clicked += () =>
             {
                 var numberError = ClientServices.ChangeEmployeeStatus((string)cpfText.Text, false);
-                if (numberError == 0)
+                if (numberError == "0")
                 {
                     MessageBox.Query("Cadastro Atualizado", "Status atualizado com sucesso", "Ok");
                     Application.Shutdown();
@@ -34,14 +34,14 @@ namespace AdaCredit.UI.UseCases
                 }
                 else
                 {
-                    PersonExceptions.InvalidCpf();
+                    PersonValidation.InvalidCpf();
                 }
             };
             var activate = new Button("Ativar");
             activate.Clicked += () =>
             {
                 var numberError = ClientServices.ChangeEmployeeStatus((string)cpfText.Text, true);
-                if (numberError == 0)
+                if (numberError == "0")
                 {
                     MessageBox.Query("Cadastro Atualizado", "Status atualizado com sucesso", "Ok");
                     Application.Shutdown();
@@ -49,7 +49,7 @@ namespace AdaCredit.UI.UseCases
                 }
                 else
                 {
-                    PersonExceptions.InvalidCpf();
+                    PersonValidation.InvalidCpf();
                 }
             };
             var d = new Dialog("Cadastrar Funcionario", 60, 20, activate, deactivate);

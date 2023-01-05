@@ -20,8 +20,8 @@ namespace AdaCredit.UI
             var menu = new MenuBar(new MenuBarItem[] {
             new MenuBarItem ("Cliente", new MenuItem [] {
                 new MenuItem ("Cadastrar Novo Cliente", "", () => { CreateClient.Run(); }, null, null, Key.AltMask | Key.CtrlMask | Key.D),
-                new MenuItem ("Consultar os Dados de um Cliente", "", () => { }, null, null, Key.AltMask | Key.CtrlMask| Key.N),
-                new MenuItem ("Alterar o Cadastro de um Cliente", "", () => { }, null, null, Key.AltMask | Key.CtrlMask| Key.O),
+                new MenuItem ("Consultar os Dados de um Cliente", "", () => { ConsultClient.Run(); }, null, null, Key.AltMask | Key.CtrlMask| Key.N),
+                new MenuItem ("Alterar o Cadastro de um Cliente", "", () => { UpdateClient.Run(); }, null, null, Key.AltMask | Key.CtrlMask| Key.O),
                 new MenuItem ("Desativar Cadastro de um Cliente", "", () => { DeactivateClient.Run(); }, null, null, Key.AltMask | Key.CtrlMask | Key.H)
             }),
             new MenuBarItem ("Funcionario", new MenuItem [] {
@@ -30,13 +30,13 @@ namespace AdaCredit.UI
                 new MenuItem ("Desativar Cadastro de um Funcionario", "", () => { DeactivateEmployee.Run(); }, null, null, Key.AltMask | Key.CtrlMask | Key.H)
             }),
             new MenuBarItem ("Transações", new MenuItem [] {
-                new MenuItem ("Processar Transações", "", () => { }, null, null, Key.AltMask | Key.CtrlMask | Key.D)
+                new MenuItem ("Processar Transações", "", () => { TransactionServices.ProcessTransactions(); }, null, null, Key.AltMask | Key.CtrlMask | Key.D)
             }),
             new MenuBarItem ("Relatórios", new MenuItem [] {
-                new MenuItem ("Exibir Todos os Clientes Ativos", "", () => { }, null, null, Key.AltMask | Key.CtrlMask | Key.D),
-                new MenuItem ("Exibir Todos os Clientes Inativos", "", () => { }, null, null, Key.AltMask | Key.CtrlMask| Key.N),
-                new MenuItem ("Exibir Todos os Funcionários Ativos", "", () => { }, null, null, Key.AltMask | Key.CtrlMask| Key.O),
-                new MenuItem ("Exibir Transações com Erro", "", () => { }, null, null, Key.AltMask | Key.CtrlMask | Key.H)
+                new MenuItem ("Exibir Todos os Clientes Ativos", "", () => { ReportClient.Active(); }, null, null, Key.AltMask | Key.CtrlMask | Key.D),
+                new MenuItem ("Exibir Todos os Clientes Inativos", "", () => { ReportClient.Inactive(); }, null, null, Key.AltMask | Key.CtrlMask| Key.N),
+                new MenuItem ("Exibir Todos os Funcionários Ativos", "", () => { ReportEmployee.Run(); }, null, null, Key.AltMask | Key.CtrlMask| Key.O),
+                new MenuItem ("Exibir Transações com Erro", "", () => { ReportFailedTransactions.Run(); }, null, null, Key.AltMask | Key.CtrlMask | Key.H)
             }),
             new MenuBarItem("Sair", new MenuItem []
             {
