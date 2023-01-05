@@ -31,5 +31,11 @@ namespace AdaCredit.Domain
 
         public new string GetHashCode()
         => this.Id;
+
+        public override string ToString()
+        {
+            var status = this.Status ? "Ativado" : "Desativado";
+            return $"Nome: {this.Name}\nCpf: {this.Id}\nStatus: {status}\nConta:\n{this.Account.ToString()}";
+        }
     }
 }
