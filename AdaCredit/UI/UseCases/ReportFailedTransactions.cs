@@ -56,7 +56,7 @@ namespace AdaCredit.UI.UseCases
                 .RepresentationGetter = (x) => data[(int)x].DestinyAccountId;
 
             tableView.Style.GetOrCreateColumnStyle(dt.Columns["Valor"])
-                .RepresentationGetter = (x) => data[(int)x].DestinyAccountId;
+                .RepresentationGetter = (x) => $"{data[(int)x].TransactionAmount}";
 
 
             var ok = new Button("Ok");

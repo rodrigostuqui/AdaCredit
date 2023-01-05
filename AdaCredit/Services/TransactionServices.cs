@@ -21,8 +21,6 @@ namespace AdaCredit.Services
 
         public static void ProcessTransactions()
         {
-            Client originClient = null;
-            Client destinyClient = null;
             var files = Directory.GetFiles($"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}\\Transactions\\Pending");
             foreach (var file in files)
             {
@@ -35,6 +33,8 @@ namespace AdaCredit.Services
                 pendingTransactions.loadData();
                 for (int i = 0; i < pendingTransactions.Count(); i++)
                 {
+                    Client originClient = null;
+                    Client destinyClient = null;
                     var amount = pendingTransactions._data[i].CalculateTax(data);
                     if (pendingTransactions._data[i].OriginbankId == "777" && pendingTransactions._data[i].OriginAgencyId == "0001")
                     {
@@ -42,14 +42,14 @@ namespace AdaCredit.Services
                         if (originClient == null)
                         {
                             addError(pendingTransactions._data[i], listFilename);
-                            break;
+                            continue;
                         }
                         else
                         {
                             if (originClient.Account.Balance < amount)
                             {
                                 addError(pendingTransactions._data[i], listFilename);
-                                break;
+                                continue;
                             }
                             else
                             {
@@ -63,7 +63,7 @@ namespace AdaCredit.Services
                         if (destinyClient == null)
                         {
                             addError(pendingTransactions._data[i], listFilename);
-                            break;
+                            continue;
                         }
                         else
                         {
@@ -73,7 +73,7 @@ namespace AdaCredit.Services
                     if (pendingTransactions._data[i].TransctionType == "TEF" && (originClient == null || destinyClient == null))
                     {
                         addError(pendingTransactions._data[i], listFilename);
-                        break;
+                        continue;
                     }
                     ClientServices.clientRepository.UpdateData();
                     addCompleted(pendingTransactions._data[i], listFilename);
@@ -99,8 +99,9 @@ namespace AdaCredit.Services
             var files = Directory.GetFiles($"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}\\Transactions\\Failed");
             foreach ( var file in files ) 
             {
-                failedTransactions = new Repository<Transactions>($"\\Transactions\\Failed\\{Path.GetFileName(file)}");
-                foreach(var transaction in failedTransactions._data)
+                failedTransactions = new Repository<Transactions>($"Transactions\\Failed\\{Path.GetFileName(file)}");
+                failedTransactions.loadData();
+                foreach (var transaction in failedTransactions._data)
                 {
                     listFailed.Add(transaction);
                 }
